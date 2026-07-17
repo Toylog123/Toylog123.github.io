@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="佟亚龙 · 国防科技大学集成电路科学与工程硕士，研究方向 AI for EDA，聚焦 ECO（工程变更单）智能化求解。">
+<meta name="author" content="佟亚龙">
+<meta property="og:title" content="佟亚龙 · AI for EDA / ECO">
+<meta property="og:description" content="国防科技大学集成电路科学与工程硕士，研究方向 AI for EDA，聚焦 ECO。">
+<meta property="og:type" content="profile">
+<title>佟亚龙 · AI for EDA / ECO</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f6f7f9;
+    --text: #1f2328;
+    --muted: #5a6470;
+    --line: #e6e8eb;
+    --accent: #1565c0;
+    --accent-soft: #e8f0fb;
+    --shadow: 0 1px 2px rgba(31, 35, 40, 0.04), 0 2px 12px rgba(31, 35, 40, 0.04);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Lato", -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* 顶部导航 */
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topnav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .topnav .brand {
+    font-weight: 700;
+    color: var(--text);
+    font-size: 16px;
+    letter-spacing: 0.3px;
+  }
+  .topnav nav {
+    display: flex;
+    gap: 22px;
+    margin-left: auto;
+    font-size: 14px;
+  }
+  .topnav nav a {
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .topnav nav a:hover { color: var(--accent); text-decoration: none; }
+
+  /* 主体布局 */
+  .page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* 头部：双栏 */
+  .hero {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: center;
+    padding: 8px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  .avatar-wrap { display: flex; justify-content: center; }
+  .avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1565c0 0%, #5e92f3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 78px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-text h1 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .hero-text .role {
+    color: var(--accent);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .hero-text .tagline {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 560px;
+  }
+  .hero-text .meta {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+  .hero-text .meta span { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* 区块 */
+  section { padding: 48px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 22px;
+    letter-spacing: -0.2px;
+  }
+  section h2 small {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 10px;
+  }
+
+  /* 段落 */
+  .prose p { color: #2a3038; font-size: 15.5px; margin-bottom: 12px; }
+  .prose p strong { color: var(--text); }
+
+  /* 信息列表 */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 40px;
+  }
+  .info-item { display: flex; flex-direction: column; gap: 2px; }
+  .info-item .label {
+    font-size: 12.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .info-item .value { font-size: 15.5px; font-weight: 600; }
+
+  /* 标签 */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 13.5px;
+    font-weight: 500;
+  }
+
+  /* 时间线（荣誉） */
+  .timeline { position: relative; padding-left: 22px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 6px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: var(--line);
+  }
+  .timeline-item { position: relative; margin-bottom: 22px; }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -22px; top: 9px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .timeline-item .year {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .timeline-item .desc { font-size: 15px; color: #2a3038; }
+  .timeline-item .desc strong { color: var(--accent); }
+
+  /* 联系方式 */
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 14.5px;
+    font-weight: 500;
+    background: #fff;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .contact a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  /* 证书缩略图 */
+  .certs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .cert {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .cert:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent);
+    text-decoration: none;
+  }
+  .cert .thumb {
+    aspect-ratio: 4 / 3;
+    background: var(--bg-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .cert .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .cert .thumb.pdf {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .cert .thumb.pdf::before {
+    content: "PDF";
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  .cert .label {
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--text);
+    border-top: 1px solid var(--line);
+    line-height: 1.4;
+  }
+  .cert .label small {
+    display: block;
+    color: var(--muted);
+    font-size: 11.5px;
+    margin-top: 2px;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 56px;
+  }
+
+  /* 响应式 */
+  @media (max-width: 720px) {
+    .topnav nav { gap: 14px; font-size: 13px; }
+    .hero { grid-template-columns: 1fr; gap: 24px; padding-bottom: 36px; text-align: center; }
+    .hero-text .meta { justify-content: center; }
+    .info-grid { grid-template-columns: 1fr; }
+    .page { padding: 32px 18px 60px; }
+  }
+</style>
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="topnav">
+    <div class="topnav-inner">
+      <div class="brand">佟亚龙</div>
+      <nav>
+        <a href="#about">关于</a>
+        <a href="#info">信息</a>
+        <a href="#research">研究</a>
+        <a href="#honors">荣誉</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- 头部 -->
+    <section class="hero">
+      <div class="avatar-wrap">
+        <div class="avatar"><img src="avatar.jpg" alt="佟亚龙"></div>
+      </div>
+      <div class="hero-text">
+        <h1>佟亚龙</h1>
+        <div class="role">AI for EDA · ECO 方向</div>
+        <p class="tagline">聚焦人工智能驱动的电子设计自动化，致力于用机器学习与组合优化方法提升 ECO（工程变更单）问题的求解效率与质量。</p>
+        <div class="meta">
+          <span>🎓 国防科技大学 · 硕士在读</span>
+          <span>📍 湖南 · 长沙</span>
+          <span>🧪 集成电路</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于 -->
+    <section id="about">
+      <h2>关于 <small>About</small></h2>
+      <div class="prose">
+        <p>我是佟亚龙，<strong>国防科技大学</strong>集成电路科学与工程专业在读硕士研究生，目前主要研究方向为 <strong>AI for EDA</strong>——人工智能驱动的电子设计自动化，具体聚焦于其中的 <strong>ECO（Engineering Change Order，工程变更单）</strong> 问题。</p>
+        <p>ECO 处于芯片后端物理设计流程的关键环节：设计在综合、布局布线之后，常常因时序收敛、功耗约束或可制造性等问题需要进行局部修改。如何在最小改动代价下高效完成 ECO，是工业界和学术界共同关心的课题。我的研究兴趣是借助机器学习与组合优化方法，提升 ECO 决策的自动化与质量。</p>
+      </div>
+    </section>
+
+    <!-- 基本信息 -->
+    <section id="info">
+      <h2>基本信息 <small>Info</small></h2>
+      <div class="info-grid">
+        <div class="info-item"><span class="label">姓名</span><span class="value">佟亚龙</span></div>
+        <div class="info-item"><span class="label">所在城市</span><span class="value">湖南 · 长沙</span></div>
+        <div class="info-item"><span class="label">本科</span><span class="value">国防科技大学 · 集成电路设计与集成系统</span></div>
+        <div class="info-item"><span class="label">硕士</span><span class="value">国防科技大学 · 集成电路科学与工程（在读）</span></div>
+        <div class="info-item"><span class="label">研究方向</span><span class="value">AI for EDA / ECO</span></div>
+        <div class="info-item"><span class="label">学位</span><span class="value">工学硕士</span></div>
+      </div>
+    </section>
+
+    <!-- 研究与技能 -->
+    <section id="research">
+      <h2>研究与技能 <small>Research & Skills</small></h2>
+      <div class="tags">
+        <span class="tag">AI for EDA</span>
+        <span class="tag">ECO 工程变更</span>
+        <span class="tag">机器学习</span>
+        <span class="tag">组合优化</span>
+        <span class="tag">芯片后端设计</span>
+        <span class="tag">时序收敛</span>
+        <span class="tag">物理设计</span>
+      </div>
+    </section>
+
+    <!-- 荣誉 -->
+    <section id="honors">
+      <h2>荣誉与获奖 <small>Honors & Awards</small></h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="year">2025</div>
+          <div class="desc"><strong>EDA 精英挑战赛</strong> · 全国三等奖</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2024</div>
+          <div class="desc"><strong>C4 网络技术挑战赛</strong> · 国家级一等奖；<strong>集成电路创新创业大赛（集创）</strong> · 国家级三等奖；军事仿真挑战 · 二等奖；军旗推演大赛 · 二等奖</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2023</div>
+          <div class="desc">军事建模 · 二等奖</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2021—2024</div>
+          <div class="desc">学习标兵 · 训练标兵 · 四有表彰 · 优秀管理骨干</div>
+        </div>
+      </div>
+
+      <div class="certs">
+        <a class="cert" href="honors/2025_EDA精英挑战赛_国家级三等奖.pdf" target="_blank" rel="noopener">
+          <div class="thumb pdf"></div>
+          <div class="label">EDA 精英挑战赛 · 全国三等奖<small>2025 · 国家级</small></div>
+        </a>
+        <a class="cert" href="honors/2024_C4网络技术挑战赛_全国一等奖.jpg" target="_blank" rel="noopener">
+          <div class="thumb"><img src="honors/2024_C4网络技术挑战赛_全国一等奖.jpg" alt="2024 C4 一等奖证书"></div>
+          <div class="label">C4 网络技术挑战赛 · 一等奖<small>2024 · 国家级</small></div>
+        </a>
+        <a class="cert" href="honors/2024年_集成电路创新创业大赛_国家级三等奖.jpg" target="_blank" rel="noopener">
+          <div class="thumb"><img src="honors/2024年_集成电路创新创业大赛_国家级三等奖.jpg" alt="2024 集创三等奖证书"></div>
+          <div class="label">集成电路创新创业大赛 · 三等奖<small>2024 · 国家级</small></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact">
+      <h2>联系我 <small>Contact</small></h2>
+      <div class="contact">
+        <a href="mailto:1622574463@qq.com">✉️ 邮箱 · 1622574463@qq.com</a>
+        <a href="https://github.com/Toylog123" target="_blank" rel="noopener">⌥ GitHub · Toylog123</a>
+      </div>
+    </section>
+
+    <footer>© 2026 佟亚龙 · 个人简介</footer>
+  </main>
+</body>
+</html>
