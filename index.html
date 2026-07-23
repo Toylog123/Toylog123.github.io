@@ -320,21 +320,10 @@
   /* ===== 证书 ===== */
   .certs {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
     margin-top: 22px;
-  }
-  .certs-landscape {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  }
-  .certs-portrait {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  }
-  .certs + h3.certs-title {
-    margin: 36px 0 0;
-    font-size: 14px;
-    color: var(--muted);
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    align-items: start;
   }
   .cert {
     display: block;
@@ -356,9 +345,10 @@
     justify-content: center;
     overflow: hidden;
   }
-  .certs-landscape .cert .thumb { aspect-ratio: 3 / 2; }
-  .certs-portrait .cert .thumb { aspect-ratio: 2 / 3; }
   .cert .thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .cert-landscape .thumb { aspect-ratio: 3 / 2; }
+  .cert-portrait .thumb { aspect-ratio: 2 / 3; }
+  .cert-portrait { max-width: 280px; justify-self: start; }
   .cert .label {
     padding: 12px 14px;
     font-size: 13.5px;
@@ -521,20 +511,16 @@
         </div>
       </div>
 
-      <div class="certs certs-landscape">
-        <a class="cert" href="honors/2024_集成电路创新创业大赛_全国三等奖.jpg" target="_blank" rel="noopener">
+      <div class="certs">
+        <a class="cert cert-landscape" href="honors/2024_集成电路创新创业大赛_全国三等奖.jpg" target="_blank" rel="noopener">
           <div class="thumb"><img src="honors/2024_集成电路创新创业大赛_全国三等奖.jpg" alt="2024 集创三等奖证书"></div>
           <div class="label">集成电路创新创业大赛 · 三等奖<small>2024 · 全国</small></div>
         </a>
-      </div>
-
-      <h3 class="certs-title">竖版证书</h3>
-      <div class="certs certs-portrait">
-        <a class="cert" href="honors/2025_EDA精英挑战赛_全国三等奖.png" target="_blank" rel="noopener">
+        <a class="cert cert-portrait" href="honors/2025_EDA精英挑战赛_全国三等奖.png" target="_blank" rel="noopener">
           <div class="thumb"><img src="honors/2025_EDA精英挑战赛_全国三等奖.png" alt="2025 EDA 精英挑战赛三等奖证书"></div>
           <div class="label">EDA 精英挑战赛 · 全国三等奖<small>2025 · 全国</small></div>
         </a>
-        <a class="cert" href="honors/2024_C4网络技术挑战赛_全国一等奖.jpg" target="_blank" rel="noopener">
+        <a class="cert cert-portrait" href="honors/2024_C4网络技术挑战赛_全国一等奖.jpg" target="_blank" rel="noopener">
           <div class="thumb"><img src="honors/2024_C4网络技术挑战赛_全国一等奖.jpg" alt="2024 C4 一等奖证书"></div>
           <div class="label">C4 网络技术挑战赛 · 一等奖<small>2024 · 全国</small></div>
         </a>
