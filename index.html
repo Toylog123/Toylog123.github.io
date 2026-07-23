@@ -120,10 +120,25 @@
     grid-template-columns: 220px 1fr;
     gap: 48px;
     align-items: center;
-    padding: 16px 0 56px;
+    padding: 24px 0 56px;
     border-bottom: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
   }
-  .avatar-wrap { display: flex; justify-content: center; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -48px -64px auto;
+    height: 340px;
+    background:
+      radial-gradient(ellipse 55% 75% at 22% 45%, rgba(201, 100, 66, 0.22), transparent 60%),
+      radial-gradient(ellipse 50% 70% at 78% 30%, rgba(224, 138, 99, 0.18), transparent 60%),
+      radial-gradient(ellipse 40% 55% at 50% 85%, rgba(255, 111, 0, 0.12), transparent 60%);
+    filter: blur(24px);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .avatar-wrap { display: flex; justify-content: center; position: relative; z-index: 1; }
   .avatar {
     width: 200px;
     height: 200px;
@@ -141,6 +156,20 @@
     box-shadow: 0 10px 30px rgba(201,100,66,0.18);
   }
   .avatar img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  /* 毛玻璃卡片（Apple visionOS 风格） */
+  .hero-text {
+    position: relative;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 22px;
+    padding: 28px 32px;
+    box-shadow:
+      0 12px 40px rgba(31, 35, 40, 0.08),
+      0 1px 3px rgba(31, 35, 40, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  }
   .hero-text h1 {
     font-size: 40px;
     font-weight: 900;
