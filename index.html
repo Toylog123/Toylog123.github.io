@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f5f2eb;
+    --bg: #ffffff;
     --surface: #faf9f5;
     --panel: #ffffff;
     --text: #1a1a1a;
@@ -47,22 +47,9 @@
     position: fixed;
     inset: 0;
     z-index: -2;
-    background:
-      radial-gradient(60% 40% at 80% 0%, rgba(201,100,66,0.06), transparent 60%),
-      radial-gradient(50% 40% at 0% 10%, rgba(201,100,66,0.05), transparent 60%),
-      var(--bg);
+    background: var(--bg);
   }
-  .bg-grid {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    opacity: 0.5;
-    background-image: radial-gradient(circle, rgba(201,100,66,0.10) 1px, transparent 1px);
-    background-size: 28px 28px;
-    mask-image: radial-gradient(ellipse 85% 55% at 50% 20%, #000 30%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 85% 55% at 50% 20%, #000 30%, transparent 100%);
-    pointer-events: none;
-  }
+  .bg-grid { display: none; }
 
   /* ===== 顶部滚动进度条 ===== */
   .progress-bar {
@@ -142,7 +129,7 @@
   .avatar {
     width: 200px;
     height: 200px;
-    border-radius: 18px;
+    border-radius: 50%;
     background: linear-gradient(135deg, #c96442 0%, #e08a63 100%);
     display: flex;
     align-items: center;
@@ -333,9 +320,21 @@
   /* ===== 证书 ===== */
   .certs {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
     margin-top: 22px;
+  }
+  .certs-landscape {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+  .certs-portrait {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  .certs + h3.certs-title {
+    margin: 36px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
   }
   .cert {
     display: block;
@@ -351,14 +350,15 @@
     border-color: rgba(201,100,66,0.4);
   }
   .cert .thumb {
-    aspect-ratio: 3 / 2;
-    background: var(--surface);
+    background: #f6f7f9;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
   }
-  .cert .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .certs-landscape .cert .thumb { aspect-ratio: 3 / 2; }
+  .certs-portrait .cert .thumb { aspect-ratio: 2 / 3; }
+  .cert .thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .cert .label {
     padding: 12px 14px;
     font-size: 13.5px;
@@ -521,7 +521,15 @@
         </div>
       </div>
 
-      <div class="certs">
+      <div class="certs certs-landscape">
+        <a class="cert" href="honors/2024_集成电路创新创业大赛_全国三等奖.jpg" target="_blank" rel="noopener">
+          <div class="thumb"><img src="honors/2024_集成电路创新创业大赛_全国三等奖.jpg" alt="2024 集创三等奖证书"></div>
+          <div class="label">集成电路创新创业大赛 · 三等奖<small>2024 · 全国</small></div>
+        </a>
+      </div>
+
+      <h3 class="certs-title">竖版证书</h3>
+      <div class="certs certs-portrait">
         <a class="cert" href="honors/2025_EDA精英挑战赛_全国三等奖.png" target="_blank" rel="noopener">
           <div class="thumb"><img src="honors/2025_EDA精英挑战赛_全国三等奖.png" alt="2025 EDA 精英挑战赛三等奖证书"></div>
           <div class="label">EDA 精英挑战赛 · 全国三等奖<small>2025 · 全国</small></div>
@@ -529,10 +537,6 @@
         <a class="cert" href="honors/2024_C4网络技术挑战赛_全国一等奖.jpg" target="_blank" rel="noopener">
           <div class="thumb"><img src="honors/2024_C4网络技术挑战赛_全国一等奖.jpg" alt="2024 C4 一等奖证书"></div>
           <div class="label">C4 网络技术挑战赛 · 一等奖<small>2024 · 全国</small></div>
-        </a>
-        <a class="cert" href="honors/2024_集成电路创新创业大赛_全国三等奖.jpg" target="_blank" rel="noopener">
-          <div class="thumb"><img src="honors/2024_集成电路创新创业大赛_全国三等奖.jpg" alt="2024 集创三等奖证书"></div>
-          <div class="label">集成电路创新创业大赛 · 三等奖<small>2024 · 全国</small></div>
         </a>
       </div>
     </section>
