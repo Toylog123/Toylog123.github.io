@@ -396,6 +396,9 @@
   .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
   .to-top:hover { box-shadow: 0 0 20px rgba(21,101,192,0.4); border-color: var(--accent); }
 
+  /* 锚点跳转避开 sticky topnav（约 50px 高 + 20px 呼吸） */
+  section[id]:not(.hero) { scroll-margin-top: 70px; }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-text h1 { animation: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
