@@ -25,6 +25,15 @@
     --accent: #1565c0;
     --accent-dark: #0d47a1;
     --accent-soft: #e8f0fb;
+    --accent-glow: rgba(21,101,192,0.4);
+    --hero-glow-a: rgba(21, 101, 192, 0.22);
+    --hero-glow-b: rgba(94, 146, 243, 0.18);
+    --hero-glow-c: rgba(94, 146, 243, 0.14);
+    --card-fill: rgba(255, 255, 255, 0.55);
+    --card-border: rgba(255, 255, 255, 0.55);
+    --card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    --topnav-bg: rgba(250,249,245,0.82);
+    --topnav-hover: #f0ece4;
     --shadow: 0 1px 2px rgba(26,26,26,0.03), 0 6px 20px rgba(21,101,192,0.05);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -59,7 +68,7 @@
     width: 0%;
     z-index: 50;
     background: linear-gradient(90deg, var(--accent), #5e92f3);
-    box-shadow: 0 0 10px rgba(21,101,192,0.4);
+    box-shadow: 0 0 10px var(--accent-glow);
     transition: width .08s linear;
   }
 
@@ -68,7 +77,7 @@
     position: sticky;
     top: 0;
     z-index: 20;
-    background: rgba(250,249,245,0.82);
+    background: var(--topnav-bg);
     backdrop-filter: saturate(160%) blur(12px);
     -webkit-backdrop-filter: saturate(160%) blur(12px);
     border-bottom: 1px solid var(--line);
@@ -96,7 +105,9 @@
     border-radius: 999px;
     transition: color .2s ease, background .2s ease;
   }
-  .topnav nav a:hover { color: var(--text); background: #f0ece4; }
+  .topnav nav a:hover { color: var(--text); background: var(--topnav-hover); }
+  .topnav nav a.active { color: var(--accent); background: var(--accent-soft); }
+  .topnav nav a.active:hover { color: var(--accent); background: var(--accent-soft); }
 
   /* ===== 主体布局 ===== */
   .page { max-width: 1080px; margin: 0 auto; padding: 48px 24px 80px; }
@@ -118,9 +129,9 @@
     inset: -48px -64px auto;
     height: 340px;
     background:
-      radial-gradient(ellipse 55% 75% at 22% 45%, rgba(21, 101, 192, 0.22), transparent 60%),
-      radial-gradient(ellipse 50% 70% at 78% 30%, rgba(94, 146, 243, 0.18), transparent 60%),
-      radial-gradient(ellipse 40% 55% at 50% 85%, rgba(94, 146, 243, 0.14), transparent 60%);
+      radial-gradient(ellipse 55% 75% at 22% 45%, var(--hero-glow-a), transparent 60%),
+      radial-gradient(ellipse 50% 70% at 78% 30%, var(--hero-glow-b), transparent 60%),
+      radial-gradient(ellipse 40% 55% at 50% 85%, var(--hero-glow-c), transparent 60%);
     filter: blur(24px);
     z-index: -1;
     pointer-events: none;
@@ -130,7 +141,7 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #1565c0 0%, #5e92f3 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, #5e92f3 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,30 +150,30 @@
     font-weight: 600;
     overflow: hidden;
     flex-shrink: 0;
-    border: 4px solid #fff;
-    box-shadow: 0 10px 30px rgba(21,101,192,0.18);
+    border: 4px solid var(--bg);
+    box-shadow: 0 10px 30px var(--accent-glow);
   }
   .avatar img { width: 100%; height: 100%; object-fit: contain; display: block; }
   /* 毛玻璃卡片（Apple visionOS 风格） */
   .hero-text {
     position: relative;
-    background: rgba(255, 255, 255, 0.55);
+    background: var(--card-fill);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--card-border);
     border-radius: 22px;
     padding: 28px 32px;
     box-shadow:
       0 12px 40px rgba(31, 35, 40, 0.08),
       0 1px 3px rgba(31, 35, 40, 0.04),
-      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      var(--card-inset);
   }
   .hero-text h1 {
     font-size: 40px;
     font-weight: 900;
     margin-bottom: 10px;
     letter-spacing: -0.5px;
-    background: linear-gradient(90deg, #1565c0, #5e92f3, #0d47a1, #1565c0);
+    background: linear-gradient(90deg, var(--accent), #5e92f3, var(--accent-dark), var(--accent));
     background-size: 300% 100%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -201,7 +212,7 @@
     padding: 5px 12px;
     border: 1px solid var(--line);
     border-radius: 999px;
-    background: #fff;
+    background: var(--panel);
   }
 
   /* ===== 区块 ===== */
@@ -244,8 +255,8 @@
   }
   .info-item:hover {
     transform: translateY(-3px);
-    border-color: rgba(21,101,192,0.35);
-    box-shadow: 0 10px 26px rgba(21,101,192,0.10);
+    border-color: var(--accent);
+    box-shadow: 0 10px 26px var(--accent-glow);
   }
   .info-item .label {
     font-size: 12px;
@@ -271,7 +282,7 @@
     transform: translateY(-2px);
     color: #fff;
     background: linear-gradient(135deg, var(--accent), #5e92f3);
-    box-shadow: 0 6px 16px rgba(21,101,192,0.3);
+    box-shadow: 0 6px 16px var(--accent-glow);
   }
 
   /* ===== 时间线 ===== */
@@ -313,7 +324,7 @@
     box-shadow: 0 4px 16px rgba(21,101,192,0.25);
     transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
   }
-  .contact a:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(21,101,192,0.4); filter: brightness(1.05); }
+  .contact a:hover { transform: translateY(-3px); box-shadow: 0 8px 24px var(--accent-glow); filter: brightness(1.05); }
   .contact a.github { background: linear-gradient(135deg, #24292e 0%, #444d56 100%); box-shadow: 0 4px 16px rgba(36, 41, 54,0.28); }
   .contact a.github:hover { box-shadow: 0 8px 24px rgba(36, 41, 54,0.42); }
 
@@ -335,8 +346,8 @@
   }
   .cert:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 34px rgba(21,101,192,0.16);
-    border-color: rgba(21,101,192,0.4);
+    box-shadow: 0 16px 34px var(--accent-glow);
+    border-color: var(--accent);
   }
   .cert .thumb {
     background: #f6f7f9;
@@ -361,12 +372,11 @@
 
   footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 56px; }
 
-  /* ===== 滚动淡入 ===== */
+  /* ===== 滚动淡入（柔和，不遮挡） ===== */
   .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);
-    will-change: opacity, transform;
+    opacity: 0.001;
+    transform: translateY(16px);
+    transition: opacity .5s cubic-bezier(.22,.61,.36,1), transform .5s cubic-bezier(.22,.61,.36,1);
   }
   .reveal.visible { opacity: 1; transform: none; }
 
@@ -378,8 +388,8 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: 1px solid rgba(21,101,192,0.3);
-    background: #fff;
+    border: 1px solid var(--accent);
+    background: var(--panel);
     color: var(--accent);
     font-size: 20px;
     display: flex;
@@ -391,13 +401,152 @@
     transform: translateY(20px) scale(.9);
     pointer-events: none;
     transition: opacity .3s ease, transform .3s ease, box-shadow .3s ease;
-    box-shadow: 0 6px 20px rgba(21,101,192,0.18);
+    box-shadow: 0 6px 20px var(--accent-glow);
   }
   .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
-  .to-top:hover { box-shadow: 0 0 20px rgba(21,101,192,0.4); border-color: var(--accent); }
+  .to-top:hover { box-shadow: 0 0 20px var(--accent-glow); border-color: var(--accent); }
 
   /* 锚点跳转避开 sticky topnav（约 50px 高 + 20px 呼吸） */
   section[id]:not(.hero) { scroll-margin-top: 70px; }
+
+  /* ===== 研究方向列表 ===== */
+  .dir-list {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+  .dir-list li {
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text);
+    transition: padding-left .18s ease, color .18s ease;
+  }
+  .dir-list li:hover { padding-left: 10px; color: var(--accent); }
+  .dir-list li strong { font-weight: 700; color: var(--text); margin-right: 6px; }
+  .dir-list li:hover strong { color: var(--accent); }
+  .dir-list li span { color: var(--muted); font-weight: 400; font-size: 14px; }
+
+  /* ===== 论文占位 ===== */
+  .pub-empty {
+    border: 1px dashed var(--line);
+    border-radius: 14px;
+    padding: 36px 24px;
+    text-align: center;
+    color: var(--muted);
+    background: var(--surface);
+  }
+  .pub-empty-icon { color: var(--muted-light); margin-bottom: 10px; }
+  .pub-empty-text { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .pub-empty-sub { font-size: 13px; color: var(--muted); }
+
+  /* ===== 灯箱 ===== */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(14, 17, 22, 0.86);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .lightbox.show { opacity: 1; pointer-events: auto; }
+  .lightbox img {
+    max-width: 92vw;
+    max-height: 88vh;
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    transform: scale(.92);
+    transition: transform .3s cubic-bezier(.22,.61,.36,1);
+  }
+  .lightbox.show img { transform: scale(1); }
+  .lightbox .lb-close, .lightbox .lb-prev, .lightbox .lb-next {
+    position: absolute;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 22px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .lightbox .lb-close:hover, .lightbox .lb-prev:hover, .lightbox .lb-next:hover { background: rgba(255,255,255,0.22); transform: scale(1.05); }
+  .lightbox .lb-close { top: 22px; right: 22px; }
+  .lightbox .lb-prev { left: 22px; top: 50%; transform: translateY(-50%); }
+  .lightbox .lightbox.show .lb-prev:hover { transform: translateY(-50%) scale(1.05); }
+  .lightbox .lb-next { right: 22px; top: 50%; transform: translateY(-50%); }
+  .lightbox .lightbox.show .lb-next:hover { transform: translateY(-50%) scale(1.05); }
+  .lightbox .lb-counter {
+    position: absolute;
+    bottom: 22px; left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 13px;
+    background: rgba(0,0,0,0.4);
+    padding: 6px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== Hero 光斑跟随 ===== */
+  .hero-text::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.22), transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .25s ease;
+  }
+  .hero-text:hover::after { opacity: 1; }
+
+  /* ===== Publications 区 ===== */
+  .pub-list { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; }
+  .pub {
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--panel);
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .pub:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 22px var(--accent-glow);
+  }
+  .pub .pub-title {
+    font-family: "Noto Serif SC", serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .pub .pub-authors { font-size: 14px; color: var(--muted); margin-bottom: 4px; }
+  .pub .pub-authors strong { color: var(--text); }
+  .pub .pub-venue { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+  .pub .pub-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pub .pub-links a {
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    background: var(--bg);
+    transition: all .18s ease;
+  }
+  .pub .pub-links a:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-text h1 { animation: none; }
@@ -413,6 +562,7 @@
     .hero-text .meta { justify-content: center; }
     .info-grid { grid-template-columns: 1fr; }
     .page { padding: 32px 18px 60px; }
+    .lightbox .lb-prev, .lightbox .lb-next { width: 40px; height: 40px; font-size: 18px; }
   }
 </style>
 </head>
@@ -429,11 +579,12 @@
     <div class="topnav-inner">
       <div class="brand">佟亚龙</div>
       <nav>
-        <a href="#about">关于</a>
-        <a href="#info">信息</a>
-        <a href="#research">研究</a>
-        <a href="#honors">荣誉</a>
-        <a href="#contact">联系</a>
+        <a href="#about" data-nav>关于</a>
+        <a href="#info" data-nav>信息</a>
+        <a href="#research" data-nav>研究</a>
+        <a href="#publications" data-nav>论文</a>
+        <a href="#honors" data-nav>荣誉</a>
+        <a href="#contact" data-nav>联系</a>
       </nav>
     </div>
   </header>
@@ -447,11 +598,11 @@
       <div class="hero-text">
         <h1>佟亚龙</h1>
         <div class="role" id="typeRole" data-text="AI for EDA · ECO 方向"><span class="cursor">&nbsp;</span></div>
-        <p class="tagline">聚焦人工智能驱动的电子设计自动化，致力于用机器学习与组合优化方法提升 ECO（工程变更命令）问题的求解效率与质量。</p>
+        <p class="tagline">用机器学习与组合优化提升 ECO（工程变更命令）决策的自动化与质量。</p>
         <div class="meta">
-          <span>🎓 国防科技大学 · 硕士在读</span>
-          <span>📍 湖南 · 长沙</span>
-          <span>🧪 集成电路</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> 国防科技大学 · 硕士在读</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 湖南 · 长沙</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg> 集成电路</span>
         </div>
       </div>
     </section>
@@ -460,8 +611,9 @@
     <section id="about" class="reveal">
       <h2>关于 <small>About</small></h2>
       <div class="prose">
-        <p><strong>国防科技大学</strong>集成电路科学与工程专业在读硕士研究生，主要研究方向为 <strong>AI for EDA</strong>——人工智能驱动的电子设计自动化，具体聚焦于其中的 <strong>ECO（Engineering Change Order，工程变更命令）</strong> 问题。</p>
-        <p>ECO 处于芯片后端物理设计流程的关键环节：设计在综合、布局布线之后，常常因时序收敛、功耗约束或可制造性等问题需要进行局部修改。如何在最小改动代价下高效完成 ECO，是工业界和学术界共同关心的课题。研究兴趣在于借助机器学习与组合优化方法，提升 ECO 决策的自动化与质量。</p>
+        <p>ECO 处于芯片后端物理设计的关键环节：综合、布局布线之后，常因时序收敛、功耗约束或可制造性等问题需要局部修改。最小改动代价下高效完成 ECO，是工业界和学术界共同关心的问题。</p>
+        <p>工业界主流的 ECO 流程依赖专家调参与启发式搜索，在超大规模电路下面临求解质量与速度的双重瓶颈。随着设计规模指数级增长与多目标约束日益复杂，传统方法的人工成本与解的质量上限都难以满足实际需求，自动化与智能化成为迫切诉求。</p>
+        <p>我关注的核心问题是：能否让 ECO 决策从「人工调参 + 启发式搜索」演进到「数据驱动 + 智能求解」——借助机器学习对历史修改 trace 建模，用组合优化在多目标约束下寻找 Pareto 最优解，并探索新型 AI 方法与现有 EDA 工具链的融合路径。</p>
       </div>
     </section>
 
@@ -469,26 +621,34 @@
     <section id="info" class="reveal">
       <h2>基本信息 <small>Info</small></h2>
       <div class="info-grid">
-        <div class="info-item"><span class="label">姓名</span><span class="value">佟亚龙</span></div>
-        <div class="info-item"><span class="label">所在城市</span><span class="value">湖南 · 长沙</span></div>
+        <div class="info-item"><span class="label">导师</span><span class="value">[导师姓名] 教授</span></div>
+        <div class="info-item"><span class="label">研究方向</span><span class="value">AI for EDA / ECO</span></div>
         <div class="info-item"><span class="label">本科</span><span class="value">国防科技大学 · 集成电路设计与集成系统</span></div>
         <div class="info-item"><span class="label">硕士</span><span class="value">国防科技大学 · 集成电路科学与工程（在读）</span></div>
-        <div class="info-item"><span class="label">研究方向</span><span class="value">AI for EDA / ECO</span></div>
         <div class="info-item"><span class="label">已获学位</span><span class="value">工学学士</span></div>
       </div>
     </section>
 
-    <!-- 研究与技能 -->
+    <!-- 研究方向 -->
     <section id="research" class="reveal">
-      <h2>研究与技能 <small>Research & Skills</small></h2>
-      <div class="tags">
-        <span class="tag">AI for EDA</span>
-        <span class="tag">ECO 工程变更</span>
-        <span class="tag">机器学习</span>
-        <span class="tag">组合优化</span>
-        <span class="tag">芯片后端设计</span>
-        <span class="tag">时序收敛</span>
-        <span class="tag">物理设计</span>
+      <h2>研究方向 <small>Research</small></h2>
+      <ul class="dir-list">
+        <li><strong>AI for EDA</strong><span>· ECO 工程变更</span></li>
+        <li><strong>机器学习</strong><span>· 组合优化 · 启发式</span></li>
+        <li><strong>物理设计</strong><span>· 时序收敛 · PPA 优化</span></li>
+        <li><strong>交叉方法</strong><span>· 图神经网络 · 强化学习 · SAT/SMT</span></li>
+      </ul>
+    </section>
+
+    <!-- 论文 / Publications -->
+    <section id="publications" class="reveal">
+      <h2>论文 <small>Publications</small></h2>
+      <div class="pub-empty">
+        <div class="pub-empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="32" height="32"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+        </div>
+        <div class="pub-empty-text">暂无发表 · 期待首篇论文中</div>
+        <div class="pub-empty-sub">欢迎邮件交流合作</div>
       </div>
     </section>
 
@@ -496,6 +656,10 @@
     <section id="honors" class="reveal">
       <h2>荣誉与获奖 <small>Honors & Awards</small></h2>
       <div class="timeline">
+        <div class="timeline-item">
+          <div class="year">2026</div>
+          <div class="desc"><strong>集成电路创新创业大赛（集创）</strong> · 华中赛区二等奖（七星微企业命题）</div>
+        </div>
         <div class="timeline-item">
           <div class="year">2025</div>
           <div class="desc"><strong>EDA 精英挑战赛</strong> · 全国三等奖</div>
@@ -515,6 +679,10 @@
       </div>
 
       <div class="certs">
+        <a class="cert cert-landscape" href="honors/2026_集成电路创新创业大赛_华中赛区二等奖.jpg" target="_blank" rel="noopener">
+          <div class="thumb"><img src="honors/2026_集成电路创新创业大赛_华中赛区二等奖.jpg" alt="2026 集成电路创新创业大赛华中赛区二等奖证书"></div>
+          <div class="label">集成电路创新创业大赛 · 华中赛区二等奖<small>2026 · 七星微企业命题</small></div>
+        </a>
         <a class="cert cert-portrait" href="honors/2025_EDA精英挑战赛_全国三等奖.png" target="_blank" rel="noopener">
           <div class="thumb"><img src="honors/2025_EDA精英挑战赛_全国三等奖.png" alt="2025 EDA 精英挑战赛三等奖证书"></div>
           <div class="label">EDA 精英挑战赛 · 全国三等奖<small>2025 · 全国</small></div>
@@ -534,8 +702,14 @@
     <section id="contact" class="reveal">
       <h2>联系我 <small>Contact</small></h2>
       <div class="contact">
-        <a class="email" href="mailto:1622574463@qq.com">✉️ 邮箱 · 1622574463@qq.com</a>
-        <a class="github" href="https://github.com/Toylog123" target="_blank" rel="noopener">⌥ GitHub · Toylog123</a>
+        <a class="email" href="mailto:1622574463@qq.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          邮箱 · 1622574463@qq.com
+        </a>
+        <a class="github" href="https://github.com/Toylog123" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.43 9.81 8.21 11.4.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.42-4.04-1.42-.55-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.92 1.24 3.23 0 4.62-2.81 5.65-5.49 5.95.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub · Toylog123
+        </a>
       </div>
     </section>
 
@@ -545,7 +719,17 @@
   <!-- 返回顶部 -->
   <button class="to-top" id="toTop" aria-label="返回顶部">↑</button>
 
+  <!-- 证书灯箱 -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="证书预览">
+    <button class="lb-close" id="lbClose" aria-label="关闭">✕</button>
+    <button class="lb-prev" id="lbPrev" aria-label="上一张">‹</button>
+    <button class="lb-next" id="lbNext" aria-label="下一张">›</button>
+    <img id="lbImg" src="" alt="">
+    <div class="lb-counter" id="lbCounter"></div>
+  </div>
+
   <script>
+    /* ===== 滚动进度 + 回到顶部 ===== */
     const progressBar = document.getElementById('progressBar');
     const toTop = document.getElementById('toTop');
     function onScroll() {
@@ -560,13 +744,73 @@
     onScroll();
     toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    /* ===== 导航高亮 + 滚动淡入 + 技能条触发 ===== */
+    const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+    const navByHash = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
+    const navSections = navLinks
+      .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+      .filter(Boolean);
+    function setActive(id) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = navByHash.get(id);
+      if (link) link.classList.add('active');
+    }
+    // 点击导航：立即高亮
+    navLinks.forEach(a => {
+      a.addEventListener('click', () => {
+        setActive(a.getAttribute('href').slice(1));
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    });
+    // 滚动：精确选「最接近视口顶部且已被滚过去」的 section
+    function updateActiveOnScroll() {
+      const navOffset = 80; // sticky 顶栏下边沿
+      // 滚到底部：强制高亮最后一项（兜底）
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        setActive(navSections[navSections.length - 1].id);
+        return;
+      }
+      // 页面顶部：默认高亮第一个
+      let currentId = navSections[0].id;
+      // 优先：找「跨越 navOffset 线」的 section（顶部 ≤ navOffset 且 底部 > navOffset）
+      for (const sec of navSections) {
+        const r = sec.getBoundingClientRect();
+        if (r.top <= navOffset && r.bottom > navOffset) {
+          currentId = sec.id;
+          break; // 同一时刻最多一个 section 跨越
+        }
+        // 兜底：整个 section 都在 navOffset 之上（已滚过），记下
+        if (r.bottom <= navOffset) {
+          currentId = sec.id;
+        }
+      }
+      setActive(currentId);
+    }
+    // 滚动淡入（IO 只触发一次）
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 
+    // 把 nav 高亮判断挂到同一个 scroll 监听上，避免重复
+    function onScrollCombined() {
+      const h = document.documentElement;
+      const scrolled = h.scrollTop;
+      const height = h.scrollHeight - h.clientHeight;
+      const pct = height > 0 ? (scrolled / height) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      toTop.classList.toggle('show', scrolled > 400);
+      updateActiveOnScroll();
+    }
+    window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScrollCombined, { passive: true });
+    onScrollCombined();
+
+    /* ===== 打字机 ===== */
     (function typewriter() {
       const el = document.getElementById('typeRole');
       if (!el) return;
@@ -580,6 +824,56 @@
         if (i < text.length) { i++; setTimeout(tick, 90); }
       }
       setTimeout(tick, 500);
+    })();
+
+    /* ===== 证书灯箱 ===== */
+    (function lightbox() {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lbImg');
+      const counter = document.getElementById('lbCounter');
+      const closeBtn = document.getElementById('lbClose');
+      const prevBtn = document.getElementById('lbPrev');
+      const nextBtn = document.getElementById('lbNext');
+      const certs = Array.from(document.querySelectorAll('.cert'));
+      let idx = 0;
+      function show(i) {
+        idx = (i + certs.length) % certs.length;
+        const href = certs[idx].getAttribute('href');
+        img.src = href;
+        img.alt = certs[idx].querySelector('img').alt;
+        counter.textContent = (idx + 1) + ' / ' + certs.length;
+      }
+      function open(i) { show(i); lb.classList.add('show'); document.body.style.overflow = 'hidden'; }
+      function close() { lb.classList.remove('show'); document.body.style.overflow = ''; }
+      certs.forEach((c, i) => c.addEventListener('click', (e) => { e.preventDefault(); open(i); }));
+      closeBtn.addEventListener('click', close);
+      prevBtn.addEventListener('click', () => show(idx - 1));
+      nextBtn.addEventListener('click', () => show(idx + 1));
+      lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+      document.addEventListener('keydown', (e) => {
+        if (!lb.classList.contains('show')) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') show(idx - 1);
+        else if (e.key === 'ArrowRight') show(idx + 1);
+      });
+      // 移动端滑动
+      let touchStartX = 0;
+      lb.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+      }, { passive: true });
+    })();
+
+    /* ===== Hero 光斑跟随 ===== */
+    (function spotlight() {
+      const card = document.querySelector('.hero-text');
+      if (!card || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
     })();
   </script>
 </body>
